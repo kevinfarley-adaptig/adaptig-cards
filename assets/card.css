@@ -1,0 +1,160 @@
+/* Adaptig trainer card — shared styles.
+   Colour and type follow the Adaptig brand pack. Six colours, no seventh.
+   Bricolage Grotesque and Figtree are the open-licence stand-ins for
+   Proxima Nova, which cannot be redistributed. */
+
+:root{
+  --paper-beige:#f9f5ea;
+  --paper-deep:#f2ecdc;
+  --charcoal:#212124;
+  --orange:#fa5929;
+  --aqua:#0a66db;
+  --green:#30966b;
+  --sky:#abc9f5;
+  --rule:rgba(33,33,36,.14);
+  --ink-soft:rgba(33,33,36,.62);
+  --font-display:'Bricolage Grotesque',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-body:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color-scheme: light;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper-beige);
+  color:var(--charcoal);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  justify-content:center;
+  padding:0 20px calc(44px + env(safe-area-inset-bottom));
+}
+
+.card{
+  width:100%;
+  max-width:430px;
+  padding-top:calc(44px + env(safe-area-inset-top));
+}
+
+/* ---------- header ---------- */
+.logo{
+  display:block;width:168px;margin:0 0 40px;
+  aspect-ratio:6501/3126;
+  background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAADKAgMAAACXq9w4AAAADFBMVEUhISQhISQhISQhISS6b4+wAAAABHRSTlMA/GGh0noltgAABWVJREFUeNrtmDtoHEcYx383K/nu7DO4cCCGFEuCg2JF5MgDQqpNF3AKFZFxEcKRKiSN61STJhjSCEIgVbhS3ClgyKPeMmmMTPwQMYEtDDEkxYEfOkl3sylm9qXbvcxJd6rmX+jE3Hfzn2/m/z1mwMHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcFh8Vi+Me8ZRcX4hUenxSTFvJm8ivFz3D8dnwTI02GKITwdpgb4c2ZaKh8ewaAw8I4fby/EpzY0CgPdRWnv0EcVxPcPJxVjhU9hdaTNmUlCPMMk4bGZPMNmiZ/ksZmU2UE7XO4ef/daYB9QXvsE5zSEowFVjbMnUUTb5AkrDE/CFJk8sXiVh9NK11yZpMnnC2fycnzA2V52+r2c2ZWt4s/Md6InrZkUfPNrGlDe1f7HifXV/ieI3hZne1usrf54A+h14b2ehPP96wB8238g6fWsqkaLmk8QmoB6E/bD7wB4C/Y69/o1DvuwAn8DfeDhwy+goQP+fIjabfbtfBoiYNMElOcD32tjHxh1tNHvgOoUZBQD3ATUS5a71+ZFiExAiUwddYDDQBttH40ECSF4IRBvWjJF7MCSmeZCmgh5HUDJXMwdFmUkkwm7lkxhuoVAkI13JrUTFrKybxZmrT2ZNkiFolxWhm6VrtKWyUu4QuBMoTWbwOOj88lZmFTCJItn3ipvoo42ijMwtfIpvT09aYvCfxGtSr9EZRloaHlFIFZ3U+LVn1OzZr+T9yFOf/vaqrRkakMbRto5CZfkH9Lo2pN7qRY/5SNA9m/BuX6AAgJ8qEvalkwRPIa2XmAI60bfEh5DcoWrBewlQRBp/QjJAC6WlzZRHk4KuqnCA9gxn0GWKc9oS5nb9BoA6+W6EBXNXqcpQYGAWiIxiZBwYKyeciRMn3y+AlJ7Ka2YPIBnH2rvajr4RXbqyXp9vWu5Dur9bP7AikkdSRaNbHqV+3pQ2tQElU2BmBJOJphG5aYRWQK2iV0xtauKEg9UeoGbkiF6s/YRF0BX9/L8U4mkutszSaDuPwtzlSP5GE7rDW7qjavZM4XARX3iXn46VTTzNfMgV1NUQKjNrFQuAHb0GajEkTj7TlAuhRhoIzVLaMMUG79qAGFcMKnltBVpbUZ5yUZT7pOi7IEAkfgjlZ56SW+Jkpn+WuRojOstU9/rVkyjZN1BElBh9hlB0mAdaBOZnJk+twGcMa3N/zL5+cOPCGDT9DoShlkuj0OayYkMzLkJIoi/XPWtmAZ5tbeQUJdrycrH3bX0sH9gO1HZcizNTi4BD6/YqVzmc8EQH9S9FYwg+WUlNdzb6EJNG18LjGKGM0RumN9GT1em8lxkgmyUrVDN0rGINJ8NAJVPA0/Le6NhoVAE1kxxMeuEB8VoKtNPrsJINq2ZGsWyIMe5nSpZ73qyAGG2/pE106i40nY+sUz29SJIrgSJw/v54jWVyS96F+md1GZ387/wAZbTo1FmUEVA3YZpkP4Z6ZzzPFvxPsCyydN30zw/zHZ9ALcrbpqi9J7RSSc4YBwBn+mD2gGWDNOeBNEFeJL17w0Y/8krXZvX0SCEZgAQd3Rk3vapBz3UNvx1Sza7PVQP4N0PaOrfrI35ankDQG3BnTvHfknIPQ0I8+/yxkYw8UqQwwsbG5YviQU8v5YJ/Vpu/H5p3+AFunM+DtNseLkNyMm0NHcm0f6XpPNdLNM59iVv27/4Hh+/wYOxXyLqeTN5EtT1sqvqvJnGE6V7YbsXVN1r5s7UrXqXmDvTrkkii9fes6p3w7kzqQiSJL/gbHQb4NLkeG3uTLzxKpe/xsHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcFhofgPqXh63ETJ0/IAAAAASUVORK5CYII=") left center/contain no-repeat;
+}
+
+h1{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:clamp(36px,10.5vw,46px);
+  line-height:1.02;
+  letter-spacing:-.024em;
+  text-wrap:balance;
+  margin:0 0 12px;
+}
+.role{font-size:17.5px;font-weight:500;margin:0}
+.meta{font-size:15px;color:var(--ink-soft);margin:3px 0 0}
+
+.rule{height:1px;background:var(--rule);border:0;margin:28px 0 22px}
+.blurb{font-size:15.5px;color:var(--ink-soft);margin:0 0 28px}
+
+/* ---------- sections ---------- */
+.label{
+  font-family:var(--font-display);
+  font-size:11.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-soft);
+  margin:0 0 11px;
+}
+.stack{display:flex;flex-direction:column;gap:10px}
+.spacer{height:26px}
+
+/* ---------- buttons ----------
+   Every button carries a brand colour, and the colour means something:
+   orange is the loud accent on the main action, green and aqua match the
+   channels people already recognise, charcoal holds the middle, sky blue
+   is the palette's designated secondary surface. */
+.btn{
+  display:flex;align-items:center;gap:14px;
+  min-height:62px;padding:0 18px;
+  border-radius:14px;
+  border:1.5px solid transparent;
+  background:transparent;
+  font-family:var(--font-body);
+  font-size:16.5px;font-weight:700;
+  text-decoration:none;width:100%;text-align:left;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:transform .08s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:3px solid var(--charcoal);outline-offset:3px}
+.btn .ic{flex:0 0 22px;width:22px;height:22px;display:block}
+.btn .txt{flex:1 1 auto;min-width:0}
+.btn .sub{
+  display:block;font-size:13px;font-weight:400;opacity:.8;margin-top:1px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.btn .chev{flex:0 0 auto;opacity:.5}
+
+.btn--orange  {background:var(--orange);  color:var(--paper-beige)}
+.btn--green   {background:var(--green);   color:var(--paper-beige)}
+.btn--aqua    {background:var(--aqua);    color:var(--paper-beige)}
+.btn--charcoal{background:var(--charcoal);color:var(--paper-beige)}
+.btn--sky     {background:var(--sky);     color:var(--charcoal)}
+.btn--sky:focus-visible{outline-color:var(--aqua)}
+
+/* ---------- details panel ---------- */
+.details{
+  margin-top:12px;
+  background:var(--paper-deep);
+  border:1px solid var(--rule);
+  border-radius:14px;
+  padding:16px 18px;
+  font-size:15px;
+}
+.details dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 16px;align-items:baseline}
+.details dt{color:var(--ink-soft);font-size:13px;letter-spacing:.02em}
+.details dd{margin:0;font-weight:500;word-break:break-word;-webkit-user-select:text;user-select:text}
+.details dd a{color:var(--aqua);text-decoration:none}
+.note{
+  display:block;margin-top:14px;font-size:13.5px;
+  font-weight:700;color:var(--green);
+}
+
+footer{
+  margin-top:34px;padding-top:18px;
+  border-top:1px solid var(--rule);
+  font-size:13.5px;color:var(--ink-soft);
+}
+footer a{color:var(--ink-soft)}
+
+/* ---------- QR view (/kevin/qr.html) ---------- */
+.qrwrap{
+  margin:0 0 22px;
+  padding:22px;
+  background:var(--paper-beige);
+  border:5px solid var(--charcoal);
+  border-radius:24px;
+}
+.qrwrap canvas,.qrwrap img{display:block;width:100%;height:auto;image-rendering:pixelated}
+.qrhead{
+  font-family:var(--font-display);font-weight:800;
+  font-size:30px;color:var(--orange);margin:0 0 6px;
+}
+.qrsub{font-size:15.5px;color:var(--ink-soft);margin:0 0 26px}
+.switch{
+  display:inline-flex;gap:8px;margin:0 0 22px;
+  background:var(--paper-deep);border:1px solid var(--rule);
+  border-radius:999px;padding:4px;
+}
+.switch button{
+  border:0;background:transparent;border-radius:999px;
+  font-family:var(--font-body);font-size:14px;font-weight:700;
+  padding:9px 16px;color:var(--ink-soft);cursor:pointer;
+}
+.switch button[aria-selected="true"]{background:var(--charcoal);color:var(--paper-beige)}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
