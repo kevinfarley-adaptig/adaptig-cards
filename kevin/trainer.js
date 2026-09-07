@@ -13,5 +13,6 @@ window.TRAINER = {
   email:    "kevin.farley@adaptig.ai",
   linkedin: "https://www.linkedin.com/in/farleykm/",
   web:      "https://adaptig.ai",
+  event:    "the Rethink Conference",
   footer:   "Adaptig runs AI training for schools, universities and organisations across Asia and Europe."
 };

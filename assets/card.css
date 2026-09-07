@@ -139,7 +139,26 @@ footer a{color:var(--ink-soft)}
   border:5px solid var(--charcoal);
   border-radius:24px;
 }
-.qrwrap canvas,.qrwrap img{display:block;width:100%;height:auto;image-rendering:pixelated}
+.qrwrap img{display:block;width:100%;height:auto;image-rendering:pixelated}
+
+/* The Adaptig mark sits in the middle of the code. Codes are drawn at
+   error-correction level H, which reconstructs up to 30% of the data, so
+   covering the centre does not stop it scanning. Keep the mark small. */
+.qrstage{position:relative}
+.qrmark{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:21%;
+  aspect-ratio:1/1;
+  background:#fff;
+  border-radius:14%;
+  display:grid;place-items:center;
+}
+.qrmark i{
+  display:block;width:72%;aspect-ratio:1/1;
+  background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAgMAAAAEE2bmAAAADFBMVEUhISQhISQhISQhISS6b4+wAAAABHRSTlMA/V6fSgd4FgAAA0BJREFUeNrtmL1u1FAQhU/GkeKILVKmtFJQgbSPkEdIA3VqHgL5LaBMxXPcB6BAipQKCRcUSNu4QGJBxqbYn+xerz1zfzrO10RRbr4de86O7zVACCGEEEIIIYQQQgghhBBCCCEKxRtnWSaWRTf4mM3VosvmcihMt8KyaIXhKVNdBQCXydUDqDO5FgCWmVxrAE0m13JbWw5XA+BPJpcDMGTK1woA3rocdRX74tJdPQCgyuJabL/fOVzXAIAyi2tTUZfFVYc1aZYXmx9PGeqSo/LSXMNB+lNduwZWGVzdUTvTXJVXX4qr9epLcdXmlYU1XoaAiX1BnewajsZrmqscNTTe1Y0aGu+qTlQY62pPVBjrqu1LC3O89IBJwN/rRNfgPb9TXOXJlsa5OgC4fH1vCdi5IV5y814eaz1gYojXWY3+zhAwMcTrB4CvgT2f2nvt9l9Dmkv2CqeHQvR4bW75lR5W0eP1c79pXSa5un1ES31jLnq8vgDb6hZJrnZ0aIh3uaOFRZKrPupen+IqJssMd/XeIKsTXAeNO4MaMFFPe/4pK9a19C5skeBqvFu3TnA5b8wXCa56NyG2l9fHu4qDC13rARM9XovnNswHTPR4bY7a91ADJnq8hoOra6Jd2yruAVwaAiaGeHUAXhkmmBim128HqQwBE8s+7sPq0TLBzi3Tq3/3XOptXF397JYzzLWYbm2waz0/OYJcS2OtFldjrNXicoF7+Lm/rfZ7/E/fXu4eR09Rde0/5uIBvxrDI1IM8foO4PPul4co165l4gAMtX7yEz1eZwCAO/3kJ3q8rvcXqpz8RI/X3cGknv0H0eO1mQx/Txy2zC6pD2/XTjk3KUQ97fWew0W4Sm9aXqknP1FfJqy9VrQRrspwOrW6Ws9ZqgET9SHUeg6JcLmJr9QQ7pLJ6VoHu4agcTvvKv0yRH21IOq7KucX2ga7qskxWwa72slb3QW76oTWT3Vr/B5zCHXJOBtOK1mC4zUdMNHi1Y/vYBXo6swHet1VjdNUaQET+2e3Ws2ixasbb8ck0OVmNm9DmEtOXGynfSdEi9ft8ZuAuYCJEq+Lg7cmjWVjTgghhBBCCCGEEEIIIYQQQgj5b/kH9Xe6viV5xHQAAAAASUVORK5CYII=") center/contain no-repeat;
+}
 .qrhead{
   font-family:var(--font-display);font-weight:800;
   font-size:30px;color:var(--orange);margin:0 0 6px;

@@ -24,7 +24,7 @@
     <button type="button" id="tab-links"   role="tab" aria-selected="false">Open my card</button>
   </div>
 
-  <div class="qrwrap"><div id="qr"></div></div>
+  <div class="qrwrap"><div class="qrstage"><div id="qr"></div><div class="qrmark" aria-hidden="true"><i></i></div></div></div>
 
   <p class="qrhead" id="head">Scan to save me</p>
   <p class="qrsub"  id="sub">Goes straight into their contacts. Works with no internet.</p>
@@ -84,7 +84,7 @@
     tabs.links.setAttribute("aria-selected", isContact ? "false" : "true");
 
     if (isContact) {
-      draw(window.TRAINER_VCARD(), "M");
+      draw(window.TRAINER_VCARD(), "H");
       head.textContent = "Scan to save me";
       sub.textContent  = "Goes straight into their contacts. Works with no internet.";
     } else {

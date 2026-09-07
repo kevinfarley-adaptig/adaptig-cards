@@ -7,7 +7,8 @@
      whatsapp,   // digits only, e.g. "85267966993"  (false to hide the button)
      email,
      linkedin,   // full https:// URL          (false to hide)
-     web         // full https:// URL          (false to hide)
+     web,        // full https:// URL          (false to hide)
+     event       // what follows "at" in the pre-written message
    }
 */
 (function () {
@@ -73,11 +74,12 @@
   window.TRAINER_VCARD = vcard;
 
   /* ---------- the pre-filled opener ----------
-     ?e=Bett%20Asia  ->  "we met at Bett Asia today" */
+     Whatever follows "at". Set `event` in trainer.js for your usual one;
+     ?e=Bett%20Asia in the link overrides it for a single event. */
 
   var evt = "";
   try { evt = (new URLSearchParams(location.search).get("e") || "").trim().slice(0, 60); } catch (e) {}
-  var where = evt ? "at " + evt : "at the conference";
+  var where = "at " + (evt || T.event || "the conference");
 
   /* ---------- icons ---------- */
 

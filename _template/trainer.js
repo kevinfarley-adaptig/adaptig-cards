@@ -13,5 +13,6 @@ window.TRAINER = {
   email:    "you@adaptig.ai",
   linkedin: "https://www.linkedin.com/in/yourhandle/",
   web:      "https://adaptig.ai",
+  event:    false,  // e.g. "Bett Asia". false gives "we met at the conference".
   footer:   "Adaptig runs AI training for schools, universities and organisations across Asia and Europe."
 };
