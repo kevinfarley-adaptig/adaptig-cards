@@ -13,6 +13,6 @@ window.TRAINER = {
   email:    "kevin.farley@adaptig.ai",
   linkedin: "https://www.linkedin.com/in/farleykm/",
   web:      "https://adaptig.ai",
-  event:    "the Rethink Conference",
+  event:    false,  // the code is permanent, so it names no venue. Use ?e= for one event.
   footer:   "Adaptig runs AI training for schools, universities and organisations across Asia and Europe."
 };

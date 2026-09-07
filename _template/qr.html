@@ -33,6 +33,7 @@
     <dl>
       <dt>Use it</dt><dd>Show this screen. They point their camera at it.</dd>
       <dt>Keep it</dt><dd>Press and hold the code to save it to your photos, then set it as a lock screen.</dd>
+      <dt>Event</dt><dd id="evt"></dd>
       <dt>Link</dt><dd><a id="cardlink" href="./">your card</a></dd>
     </dl>
   </div>
@@ -49,11 +50,17 @@
 (function () {
   "use strict";
   var T = window.TRAINER || {};
-  var cardUrl = location.href.replace(/qr\.html.*$/, "");
+  // Strip qr.html but keep any ?e=, so this page can mint an event-specific code.
+  var cardUrl = location.href.split("?")[0].replace(/qr\.html$/, "") + location.search;
+  var evt = "";
+  try { evt = (new URLSearchParams(location.search).get("e") || "").trim(); } catch (e) {}
 
   document.getElementById("who").textContent  = T.name || "Your QR codes";
   document.getElementById("role").textContent = [T.role, T.org].filter(Boolean).join(", ");
   document.getElementById("cardlink").textContent = cardUrl.replace(/^https?:\/\//, "");
+  document.getElementById("evt").textContent = evt
+    ? evt + " \u2014 messages will name it"
+    : "None. Add ?e=Event+Name to this page's link to mint a code that does.";
 
   var box  = document.getElementById("qr");
   var head = document.getElementById("head");

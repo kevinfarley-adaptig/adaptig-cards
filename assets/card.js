@@ -8,7 +8,7 @@
      email,
      linkedin,   // full https:// URL          (false to hide)
      web,        // full https:// URL          (false to hide)
-     event       // what follows "at" in the pre-written message
+     event       // optional venue, e.g. "Bett Asia". Omit for a code that works anywhere.
    }
 */
 (function () {
@@ -74,12 +74,30 @@
   window.TRAINER_VCARD = vcard;
 
   /* ---------- the pre-filled opener ----------
-     Whatever follows "at". Set `event` in trainer.js for your usual one;
-     ?e=Bett%20Asia in the link overrides it for a single event. */
+     This code lives on a lock screen, a slide, an email signature. It gets
+     scanned at events, after workshops, months later. So it names no venue
+     unless one is set.
+
+     The message ends where they type. Phone keyboards drop the cursor at the
+     end of pre-filled text, so anything after the blank is text they have to
+     reach back and edit around. Identity prompt goes last, always.
+
+     What we want back is the thing WhatsApp does not already give us: who
+     they are and who they are from. Their number and display name arrive
+     with the message anyway.
+
+     Set `event` in trainer.js, or add ?e=Bett%20Asia to the link, and the
+     venue is named first, before the prompt. */
 
   var evt = "";
   try { evt = (new URLSearchParams(location.search).get("e") || "").trim().slice(0, 60); } catch (e) {}
-  var where = "at " + (evt || T.event || "the conference");
+  var place = evt || T.event || "";
+  var first = T.name.split(" ")[0];
+
+  var opener = place
+    ? "Hi " + first + ", we met at " + place + ". It's "
+    : "Hi " + first + ", it's ";
+  var subject = place ? "We met at " + place : "We met";
 
   /* ---------- icons ---------- */
 
@@ -145,18 +163,21 @@
   if (T.whatsapp) {
     stack.appendChild(button({
       tone: "green", icon: "whatsapp",
-      href: "https://wa.me/" + T.whatsapp + "?text=" +
-            encodeURIComponent("Hi " + T.name.split(" ")[0] + ", we met " + where + " today. "),
+      href: "https://wa.me/" + T.whatsapp + "?text=" + encodeURIComponent(opener),
       title: "WhatsApp",
-      sub: evt ? 'Opens with "we met ' + where + '"' : "Message already written, just send"
+      sub: "Just add your name and send"
     }));
   }
   if (T.email) {
     stack.appendChild(button({
       tone: "charcoal", icon: "mail",
       href: "mailto:" + T.email +
-            "?subject=" + encodeURIComponent("We met " + where) +
-            "&body=" + encodeURIComponent("Hi " + T.name.split(" ")[0] + ",\n\nWe met " + where + " today. \n\n"),
+            "?subject=" + encodeURIComponent(subject) +
+            "&body=" + encodeURIComponent(
+              place
+                ? "Hi " + first + ",\n\nWe met at " + place + ". It's "
+                : "Hi " + first + ",\n\nIt's "
+            ),
       title: "Email", sub: T.email
     }));
   }
