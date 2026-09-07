@@ -68,7 +68,8 @@
     q.addData(text);
     q.make();
     // An <img> rather than a canvas, so press-and-hold saves it on a phone.
-    box.innerHTML = q.createImgTag(10, 0);
+    // Margin 4 is the quiet zone the QR spec requires. Without it scanners fail.
+    box.innerHTML = q.createImgTag(10, 4);
     var img = box.querySelector("img");
     img.style.width = "100%";
     img.style.height = "auto";
