@@ -31,17 +31,53 @@ Open `yourname/qr.html` on your phone. Two codes, switchable:
 Press and hold either code to save it to your photos. Set it as a lock screen and
 you can show it without unlocking your phone.
 
-## Naming the event
+## The pre-written message
 
-Add `?e=` and the event name to your link and the pre-written WhatsApp and email
-messages change to match:
+Tapping WhatsApp or Email opens with an opener already typed:
+
+```
+Hi Kevin, it's
+```
+
+It stops there on purpose. Three reasons.
+
+**The code is permanent.** It goes on a lock screen, a slide, an email signature.
+It gets scanned at events, after workshops, and months later. So it names no
+venue unless you set one.
+
+**You need what the channel does not already give you.** WhatsApp hands you their
+number and display name with the message. What is missing is who they are and who
+they are from. So the opener asks for that and nothing else.
+
+**The cursor lands at the end.** Phone keyboards drop it after the pre-filled
+text, so anything written past the blank is text they have to reach back and edit
+around. Most will not. Whatever they need to type comes last, always.
+
+## Naming an event when you want one
+
+Set `event` in your `trainer.js`, or add `?e=` to the link, and the venue is named
+first, before the prompt:
+
+| | Opens with |
+|---|---|
+| Default | `Hi Kevin, it's ` |
+| Event named | `Hi Kevin, we met at Bett Asia. It's ` |
+
+The link wins over the `event` field, so you can keep the field off and mint a
+one-off code for a single event:
 
 ```
 https://kevinfarley-adaptig.github.io/adaptig-cards/kevin/?e=Bett%20Asia
 ```
 
-That opens WhatsApp with "Hi Kevin, we met at Bett Asia today." Without it, the
-message says "at the conference", which works anywhere.
+Easiest way to do that: open your `qr.html` with the same parameter on it, and the
+card code it draws carries the event through.
+
+```
+https://kevinfarley-adaptig.github.io/adaptig-cards/kevin/qr.html?e=Bett%20Asia
+```
+
+That page tells you which event, if any, the code currently names.
 
 ## Fields in trainer.js
 
@@ -57,6 +93,7 @@ message says "at the conference", which works anywhere.
 | `email` | |
 | `linkedin` | Full URL. `false` hides it. |
 | `web` | Full URL. `false` hides it. |
+| `event` | Optional venue named before the prompt, e.g. `"Bett Asia"`. `false` names none, which is right for a permanent code. |
 | `footer` | One line at the bottom. `false` hides it. |
 
 ## How it is built
