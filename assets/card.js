@@ -13,6 +13,9 @@
    Per-trainer options sit on <main>:
      data-whatsapp  digits only, no plus, no spaces. Omit to hide the button.
      data-event     optional venue named in the opener. ?e= in the link wins.
+     data-opener    "none" for no pre-written message, or your own text, used
+                    verbatim for both WhatsApp and email. Omit for the default.
+     data-subject   your own email subject, or "none". Omit for the default.
 */
 (function () {
   "use strict";
@@ -44,7 +47,9 @@
     linkedin: field("linkedin"),
     web:      field("web"),
     whatsapp: root.dataset.whatsapp || "",
-    event:    root.dataset.event || ""
+    event:    root.dataset.event || "",
+    opener:   (root.dataset.opener || "").trim(),
+    subject:  (root.dataset.subject || "").trim()
   };
   if (!T.name) return;
 
@@ -90,17 +95,39 @@
      around. The identity prompt goes last, always.
 
      We ask for the one thing the channel does not already hand over: who they
-     are and who they are from. Their number arrives with the message anyway. */
+     are and who they are from. Their number arrives with the message anyway.
+
+     Only WhatsApp and email can carry one. A LinkedIn URL cannot pre-fill a
+     connection note and a website cannot pre-fill anything, so those two
+     buttons are plain links and always will be.
+
+     data-opener overrides all of this: "none" opens an empty message, and any
+     other text is used exactly as written. If you write your own, end it where
+     the sender should type. */
 
   var evt = "";
   try { evt = (new URLSearchParams(location.search).get("e") || "").trim().slice(0, 60); } catch (e) {}
   var place = evt || T.event || "";
 
-  var opener  = place ? "Hi " + first + ", we met at " + place + ". It's "
-                      : "Hi " + first + ", it's ";
-  var subject = place ? "We met at " + place : "We met";
-  var body    = place ? "Hi " + first + ",\n\nWe met at " + place + ". It's "
-                      : "Hi " + first + ",\n\nIt's ";
+  var mute = T.opener.toLowerCase() === "none";
+  var opener, body;
+
+  if (mute) {
+    opener = "";
+    body   = "";
+  } else if (T.opener) {
+    opener = T.opener;
+    body   = T.opener;
+  } else {
+    opener = place ? "Hi " + first + ", we met at " + place + ". It's "
+                   : "Hi " + first + ", it's ";
+    body   = place ? "Hi " + first + ",\n\nWe met at " + place + ". It's "
+                   : "Hi " + first + ",\n\nIt's ";
+  }
+
+  var subject = T.subject
+    ? (T.subject.toLowerCase() === "none" ? "" : T.subject)
+    : (place ? "We met at " + place : "We met");
 
   /* ---------- icons ---------- */
 
@@ -166,15 +193,16 @@
   if (T.whatsapp) {
     s2.appendChild(button({
       tone: "green", icon: "whatsapp",
-      href: "https://wa.me/" + T.whatsapp + "?text=" + encodeURIComponent(opener),
-      title: "WhatsApp", sub: "Just add your name and send"
+      href: "https://wa.me/" + T.whatsapp +
+            (opener ? "?text=" + encodeURIComponent(opener) : ""),
+      title: "WhatsApp",
+      sub: opener ? "Just add your name and send" : "Opens a chat with me"
     }));
   }
   if (T.email) {
     s2.appendChild(button({
       tone: "charcoal", icon: "mail",
-      href: "mailto:" + T.email + "?subject=" + encodeURIComponent(subject) +
-            "&body=" + encodeURIComponent(body),
+      href: "mailto:" + T.email + mailtoArgs(subject, body),
       title: "Email", sub: T.email
     }));
   }
@@ -191,6 +219,15 @@
     }));
   }
   slot.appendChild(s2);
+
+  /* mailto with only the parts that are actually set, so a muted opener does
+     not leave "?subject=&body=" hanging off the address. */
+  function mailtoArgs(subj, text) {
+    var q = [];
+    if (subj) q.push("subject=" + encodeURIComponent(subj));
+    if (text) q.push("body=" + encodeURIComponent(text));
+    return q.length ? "?" + q.join("&") : "";
+  }
 
   function tidy(u) {
     return String(u).replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "");
