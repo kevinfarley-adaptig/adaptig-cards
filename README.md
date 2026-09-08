@@ -20,7 +20,7 @@ description at the top, then your name, role, city, one line about what you do,
 and the four contact rows. Your phone number for WhatsApp goes in
 `data-whatsapp` on the `<main>` tag, digits only.
 
-## Get your QR codes
+## Get your QR code
 
 Add `#qr` to your card's address and open it on your phone:
 
@@ -28,18 +28,20 @@ Add `#qr` to your card's address and open it on your phone:
 https://kevinfarley-adaptig.github.io/adaptig-cards/yourname/#qr
 ```
 
-Two codes, switchable:
-
-- **Save my contact.** Your details encoded directly in the code. It goes
-  straight into their contacts and works with no internet at all. This is the
-  one to show in a noisy room.
-- **Open my card.** Points at your card page. Use it when you want them to see
-  the branded page and pick a channel.
+One code. It opens your card, where they can save your contact in one tap or
+pick a channel. Nothing to choose while you are shaking someone's hand, and the
+same code works on a slide, a poster or an email signature, where the person
+scanning does not know you yet.
 
 **Tap the code to fill the screen.** That makes each square about 20% larger on
 a plain white background, which is the single thing that most improves a scan
 across a table. Press and hold to save the code to your photos, then set it as
 a lock screen and you can show it without unlocking your phone.
+
+The code carries only a short link, so the squares are large: 33 of them across,
+about 7 to 8 screen pixels each on a phone, and 9 or more filling the screen.
+That is what a camera actually needs, and it is why the code is a link rather
+than your details encoded directly.
 
 ## The pre-written message
 
@@ -157,18 +159,24 @@ redistributed in a public repository. Do not swap Proxima Nova in here. If the
 fonts fail to load the page falls back to the system stack and still reads
 correctly.
 
-### The QR codes
+### The QR code
 
 `assets/qr.js` is a QR encoder written for this repo rather than pulled from a
 CDN. Some of the networks these cards get used on block third-party script
 hosts, and a card that cannot draw its own code is useless at the moment it is
 needed.
 
-The contact code uses correction level M and the link code level Q. Correction
+The code carries your card's address and uses correction level Q. Correction
 level trades against module size, and module size is what actually decides
-whether a camera reads the code across a table. Level M gives the contact code
-61 squares instead of 73, about 20% larger on screen, while still recovering
-three times more than the Adaptig mark in the middle obscures.
+whether a camera reads the code across a table. A link is short, so level Q
+costs almost nothing: 33 squares, against 61 for a version that encoded the
+contact details directly. Level Q recovers 25% of the code, five times what the
+Adaptig mark in the middle obscures.
+
+There was a second code carrying your details as a vCard, switchable. It saved
+two taps and worked with no signal, but it made you choose between two codes
+while shaking someone's hand, and it gave you nothing back: no message, no name,
+no lead. Dropping it also made the remaining squares 60% larger.
 
 ## Tests
 
