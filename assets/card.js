@@ -275,6 +275,8 @@
 
   var view = document.getElementById("qrview");
 
+  // Everything before the #, so any ?e= the trainer minted for one event is
+  // already in here. Do not append location.search to it again.
   function cardUrl() {
     return location.href.split("#")[0];
   }
@@ -322,7 +324,7 @@
     function render() {
       if (!window.AdaptigQR) { fail.hidden = false; box.innerHTML = ""; return; }
       fail.hidden = true;
-      stage.dataset.modules = drawInto(box, cardUrl() + location.search, "Q");
+      stage.dataset.modules = drawInto(box, cardUrl(), "Q");
       head.textContent = "Scan to open my card";
       sub.textContent  = "Save my contact, WhatsApp, email, LinkedIn. They pick.";
     }
