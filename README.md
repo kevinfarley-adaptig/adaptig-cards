@@ -46,8 +46,11 @@ a lock screen and you can show it without unlocking your phone.
 Tapping WhatsApp or Email opens with an opener already typed:
 
 ```
-Hi Kevin, it's
+Hi <your first name>, it's
 ```
+
+Your first name is read from the name on your card. There is nothing to set,
+and nothing in the message is anyone else's name.
 
 It stops there on purpose. Three reasons.
 
@@ -89,14 +92,14 @@ named first, before the prompt:
 
 | | Opens with |
 |---|---|
-| Default | `Hi Kevin, it's ` |
-| Event named | `Hi Kevin, we met at Bett Asia. It's ` |
+| Default | `Hi <your first name>, it's ` |
+| Event named | `Hi <your first name>, we met at Bett Asia. It's ` |
 
 The link wins over the attribute, so you can keep the attribute empty and mint a
 one-off code for a single event:
 
 ```
-https://kevinfarley-adaptig.github.io/adaptig-cards/kevin/?e=Bett%20Asia
+https://kevinfarley-adaptig.github.io/adaptig-cards/yourname/?e=Bett%20Asia
 ```
 
 Open your `#qr` view with the same parameter on it and the card code it draws
