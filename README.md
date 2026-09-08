@@ -63,6 +63,25 @@ and who they are from. So the opener asks for that and nothing else.
 text, so anything written past the blank is text they have to reach back and
 edit around. Most will not. Whatever they need to type comes last, always.
 
+Only WhatsApp and email can carry one. A LinkedIn URL cannot pre-fill a
+connection note and a website cannot pre-fill anything, so those buttons are
+plain links.
+
+## Changing or removing the message
+
+Two optional attributes on the `<main>` tag. Leave both off for the default.
+
+| Attribute | Effect |
+|---|---|
+| `data-opener="none"` | No pre-written message. WhatsApp opens an empty chat, email opens with a subject and an empty body. |
+| `data-opener="your text"` | Used exactly as written, for both WhatsApp and email. |
+| `data-subject="your text"` | Your own email subject. |
+| `data-subject="none"` | No subject at all. |
+
+If you write your own opener, end it where the sender should start typing. The
+cursor lands after your text, so anything you put past that point is text they
+have to reach back and edit around.
+
 ## Naming an event when you want one
 
 Set `data-event` on the `<main>` tag, or add `?e=` to the link, and the venue is
