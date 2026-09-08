@@ -4,24 +4,102 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- Three lines to change when you copy this folder. -->
+<!-- ============================================================
+     COPY THIS FILE to make your own card. Everything you need to
+     change is in this file and nowhere else: the four lines below,
+     and the card markup in <main>. There is no config file.
+     ============================================================ -->
 <title>Your Name — Adaptig</title>
+<meta name="description" content="Your Name, Your Role at Adaptig. One line about what you do. Your City.">
 <meta property="og:title" content="Your Name — Your Role, Adaptig">
-<meta name="description" content="Your Name, Your Role at Adaptig. What you do, in one line. Your City.">
+<meta property="og:description" content="One line about what you do. Your City.">
 
-<meta name="theme-color" content="#f9f5ea">
 <meta property="og:type" content="profile">
+<meta name="theme-color" content="#f9f5ea">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%23212124%27/%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2716%27 fill=%27%23fa5929%27/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/card.css">
 </head>
 <body>
 
-<main class="card" id="card"></main>
+<!-- data-whatsapp : digits only, no plus, no spaces. Delete it to hide the button.
+     data-event    : optional venue named in the pre-written message. Usually empty. -->
+<main class="card" id="card" data-whatsapp="85200000000" data-event="">
 
-<script src="trainer.js"></script>
+  <div class="logo" role="img" aria-label="Adaptig"></div>
+
+  <h1 data-field="name">Your Name</h1>
+  <p class="role"><span data-field="role">Your Role</span>, <span data-field="org">Adaptig</span></p>
+  <p class="meta" data-field="city">Your City</p>
+
+  <hr class="rule">
+
+  <p class="blurb">One line about what you do. Keep it short, it sits under the rule.</p>
+
+  <!-- The buttons are built here. Without JavaScript this stays empty and the
+       details below carry the whole card, which is why they are always shown. -->
+  <div id="actions"></div>
+
+  <p class="label">Or copy from here</p>
+  <div class="details">
+    <dl>
+      <dt>Mobile</dt>
+      <dd><a data-field="phone" href="tel:+85200000000">+852 0000 0000</a></dd>
+      <dt>Email</dt>
+      <dd><a data-field="email" href="mailto:you@adaptig.ai">you@adaptig.ai</a></dd>
+      <dt>LinkedIn</dt>
+      <dd><a data-field="linkedin" href="https://www.linkedin.com/in/yourhandle/">linkedin.com/in/yourhandle</a></dd>
+      <dt>Web</dt>
+      <dd><a data-field="web" href="https://adaptig.ai">adaptig.ai</a></dd>
+    </dl>
+    <p class="note" id="note" role="status" aria-live="polite" hidden></p>
+  </div>
+
+  <footer>
+    Adaptig runs AI training for schools, universities and organisations across Asia and Europe.
+  </footer>
+
+</main>
+
+<!-- Your own QR codes, at #qr on this same page. Nothing here needs editing. -->
+<section class="qrview" id="qrview" hidden aria-label="My QR codes">
+  <div class="qrhead-row">
+    <div class="logo logo--sm" role="img" aria-label="Adaptig"></div>
+    <a class="qrback" href="#">Back to card</a>
+  </div>
+
+  <div class="switch" role="tablist" aria-label="Which code">
+    <button type="button" id="tab-contact" role="tab" aria-selected="true">Save my contact</button>
+    <button type="button" id="tab-links" role="tab" aria-selected="false">Open my card</button>
+  </div>
+
+  <div class="qrwrap">
+    <div class="qrstage" id="qrstage" role="button" tabindex="0"
+         aria-pressed="false" aria-label="Tap to fill the screen">
+      <div id="qr"></div>
+      <div class="qrmark" aria-hidden="true"><i></i></div>
+    </div>
+    <p class="qrtap">Tap the code to fill the screen</p>
+  </div>
+
+  <p class="qrhead" id="qrhead">Scan to save me</p>
+  <p class="qrsub" id="qrsub">Goes straight into their contacts. Works with no internet.</p>
+
+  <p class="note" id="qrfail" hidden>The code generator did not load. Reload the page.</p>
+
+  <div class="details">
+    <dl>
+      <dt>Use it</dt><dd>Show this screen. They point their camera at it.</dd>
+      <dt>Keep it</dt><dd>Press and hold the code to save it to your photos, then set it as a lock screen.</dd>
+      <dt>Event</dt><dd id="qrevent"></dd>
+      <dt>Link</dt><dd id="qrlink"></dd>
+    </dl>
+  </div>
+</section>
+
+<script src="../assets/qr.js"></script>
 <script src="../assets/card.js"></script>
 </body>
 </html>

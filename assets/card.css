@@ -1,7 +1,14 @@
 /* Adaptig trainer card — shared styles.
-   Colour and type follow the Adaptig brand pack. Six colours, no seventh.
-   Bricolage Grotesque and Figtree are the open-licence stand-ins for
-   Proxima Nova, which cannot be redistributed. */
+
+   Six brand colours, no seventh. Bricolage Grotesque and Figtree are the
+   open-licence stand-ins for Proxima Nova, which is licensed to Adaptig and
+   cannot be redistributed in a public repository.
+
+   One deliberate derived value: --green-aa. Leaf Green at full strength gives
+   charcoal text 4.36:1, just under the 4.5:1 that WCAG AA asks for. It is
+   lifted 4% toward white, which the brand pack allows ("tints of these six are
+   allowed"), to reach 4.61:1. Every button below clears AA on both its title
+   and its sub-label; the numbers are in the comment beside each one. */
 
 :root{
   --paper-beige:#f9f5ea;
@@ -10,9 +17,10 @@
   --orange:#fa5929;
   --aqua:#0a66db;
   --green:#30966b;
+  --green-aa:#389a71;   /* Leaf Green + 4% white, so charcoal clears AA */
   --sky:#abc9f5;
   --rule:rgba(33,33,36,.14);
-  --ink-soft:rgba(33,33,36,.62);
+  --ink-soft:#5c5c60;   /* 7.0:1 on paper beige */
   --font-display:'Bricolage Grotesque',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --font-body:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   color-scheme: light;
@@ -32,19 +40,22 @@ body{
   justify-content:center;
   padding:0 20px calc(44px + env(safe-area-inset-bottom));
 }
+body.qrmode{padding-bottom:24px}
 
-.card{
+.card,.qrview{
   width:100%;
   max-width:430px;
-  padding-top:calc(44px + env(safe-area-inset-top));
+  padding-top:calc(40px + env(safe-area-inset-top));
 }
+[hidden]{display:none!important}
 
 /* ---------- header ---------- */
 .logo{
-  display:block;width:168px;margin:0 0 40px;
+  display:block;width:168px;margin:0 0 36px;
   aspect-ratio:6501/3126;
   background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAADKAgMAAACXq9w4AAAADFBMVEUhISQhISQhISQhISS6b4+wAAAABHRSTlMA/GGh0noltgAABWVJREFUeNrtmDtoHEcYx383K/nu7DO4cCCGFEuCg2JF5MgDQqpNF3AKFZFxEcKRKiSN61STJhjSCEIgVbhS3ClgyKPeMmmMTPwQMYEtDDEkxYEfOkl3sylm9qXbvcxJd6rmX+jE3Hfzn2/m/z1mwMHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcFh8Vi+Me8ZRcX4hUenxSTFvJm8ivFz3D8dnwTI02GKITwdpgb4c2ZaKh8ewaAw8I4fby/EpzY0CgPdRWnv0EcVxPcPJxVjhU9hdaTNmUlCPMMk4bGZPMNmiZ/ksZmU2UE7XO4ef/daYB9QXvsE5zSEowFVjbMnUUTb5AkrDE/CFJk8sXiVh9NK11yZpMnnC2fycnzA2V52+r2c2ZWt4s/Md6InrZkUfPNrGlDe1f7HifXV/ieI3hZne1usrf54A+h14b2ehPP96wB8238g6fWsqkaLmk8QmoB6E/bD7wB4C/Y69/o1DvuwAn8DfeDhwy+goQP+fIjabfbtfBoiYNMElOcD32tjHxh1tNHvgOoUZBQD3ATUS5a71+ZFiExAiUwddYDDQBttH40ECSF4IRBvWjJF7MCSmeZCmgh5HUDJXMwdFmUkkwm7lkxhuoVAkI13JrUTFrKybxZmrT2ZNkiFolxWhm6VrtKWyUu4QuBMoTWbwOOj88lZmFTCJItn3ipvoo42ijMwtfIpvT09aYvCfxGtSr9EZRloaHlFIFZ3U+LVn1OzZr+T9yFOf/vaqrRkakMbRto5CZfkH9Lo2pN7qRY/5SNA9m/BuX6AAgJ8qEvalkwRPIa2XmAI60bfEh5DcoWrBewlQRBp/QjJAC6WlzZRHk4KuqnCA9gxn0GWKc9oS5nb9BoA6+W6EBXNXqcpQYGAWiIxiZBwYKyeciRMn3y+AlJ7Ka2YPIBnH2rvajr4RXbqyXp9vWu5Dur9bP7AikkdSRaNbHqV+3pQ2tQElU2BmBJOJphG5aYRWQK2iV0xtauKEg9UeoGbkiF6s/YRF0BX9/L8U4mkutszSaDuPwtzlSP5GE7rDW7qjavZM4XARX3iXn46VTTzNfMgV1NUQKjNrFQuAHb0GajEkTj7TlAuhRhoIzVLaMMUG79qAGFcMKnltBVpbUZ5yUZT7pOi7IEAkfgjlZ56SW+Jkpn+WuRojOstU9/rVkyjZN1BElBh9hlB0mAdaBOZnJk+twGcMa3N/zL5+cOPCGDT9DoShlkuj0OayYkMzLkJIoi/XPWtmAZ5tbeQUJdrycrH3bX0sH9gO1HZcizNTi4BD6/YqVzmc8EQH9S9FYwg+WUlNdzb6EJNG18LjGKGM0RumN9GT1em8lxkgmyUrVDN0rGINJ8NAJVPA0/Le6NhoVAE1kxxMeuEB8VoKtNPrsJINq2ZGsWyIMe5nSpZ73qyAGG2/pE106i40nY+sUz29SJIrgSJw/v54jWVyS96F+md1GZ387/wAZbTo1FmUEVA3YZpkP4Z6ZzzPFvxPsCyydN30zw/zHZ9ALcrbpqi9J7RSSc4YBwBn+mD2gGWDNOeBNEFeJL17w0Y/8krXZvX0SCEZgAQd3Rk3vapBz3UNvx1Sza7PVQP4N0PaOrfrI35ankDQG3BnTvHfknIPQ0I8+/yxkYw8UqQwwsbG5YviQU8v5YJ/Vpu/H5p3+AFunM+DtNseLkNyMm0NHcm0f6XpPNdLNM59iVv27/4Hh+/wYOxXyLqeTN5EtT1sqvqvJnGE6V7YbsXVN1r5s7UrXqXmDvTrkkii9fes6p3w7kzqQiSJL/gbHQb4NLkeG3uTLzxKpe/xsHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcFhofgPqXh63ETJ0/IAAAAASUVORK5CYII=") left center/contain no-repeat;
 }
+.logo--sm{width:104px;margin:0}
 
 h1{
   font-family:var(--font-display);
@@ -64,7 +75,7 @@ h1{
 /* ---------- sections ---------- */
 .label{
   font-family:var(--font-display);
-  font-size:11.5px;font-weight:700;
+  font-size:12px;font-weight:700;
   letter-spacing:.1em;text-transform:uppercase;
   color:var(--ink-soft);
   margin:0 0 11px;
@@ -73,18 +84,19 @@ h1{
 .spacer{height:26px}
 
 /* ---------- buttons ----------
-   Every button carries a brand colour, and the colour means something:
-   orange is the loud accent on the main action, green and aqua match the
-   channels people already recognise, charcoal holds the middle, sky blue
-   is the palette's designated secondary surface. */
+   Each colour means something rather than decorating: the loud accent goes to
+   the action that matters most, and the two branded channels wear the colours
+   people recognise before they read the word. Sub-labels carry no opacity —
+   hierarchy comes from size and weight, so contrast never drops below the
+   title's. */
 .btn{
   display:flex;align-items:center;gap:14px;
-  min-height:62px;padding:0 18px;
+  min-height:64px;padding:11px 18px;
   border-radius:14px;
   border:1.5px solid transparent;
   background:transparent;
   font-family:var(--font-body);
-  font-size:16.5px;font-weight:700;
+  font-size:18px;font-weight:700;
   text-decoration:none;width:100%;text-align:left;
   cursor:pointer;-webkit-tap-highlight-color:transparent;
   transition:transform .08s ease;
@@ -94,19 +106,21 @@ h1{
 .btn .ic{flex:0 0 22px;width:22px;height:22px;display:block}
 .btn .txt{flex:1 1 auto;min-width:0}
 .btn .sub{
-  display:block;font-size:13px;font-weight:400;opacity:.8;margin-top:1px;
+  display:block;font-size:13.5px;font-weight:400;margin-top:2px;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
-.btn .chev{flex:0 0 auto;opacity:.5}
+.btn .chev{flex:0 0 auto}
 
-.btn--orange  {background:var(--orange);  color:var(--paper-beige)}
-.btn--green   {background:var(--green);   color:var(--paper-beige)}
-.btn--aqua    {background:var(--aqua);    color:var(--paper-beige)}
-.btn--charcoal{background:var(--charcoal);color:var(--paper-beige)}
-.btn--sky     {background:var(--sky);     color:var(--charcoal)}
-.btn--sky:focus-visible{outline-color:var(--aqua)}
+.btn--orange  {background:var(--orange);  color:var(--charcoal)}    /* 4.99:1 */
+.btn--green   {background:var(--green-aa);color:var(--charcoal)}    /* 4.61:1 */
+.btn--charcoal{background:var(--charcoal);color:var(--paper-beige)} /* 14.7:1 */
+.btn--aqua    {background:var(--aqua);    color:var(--paper-beige)} /* 4.90:1 */
+.btn--sky     {background:var(--sky);     color:var(--charcoal)}    /* 9.49:1 */
+.btn--sky:focus-visible,.btn--charcoal:focus-visible{outline-color:var(--aqua)}
 
-/* ---------- details panel ---------- */
+/* ---------- details panel ----------
+   Always visible. It is the card when the script does not run, so it is never
+   put behind a tap. */
 .details{
   margin-top:12px;
   background:var(--paper-deep);
@@ -115,13 +129,14 @@ h1{
   padding:16px 18px;
   font-size:15px;
 }
-.details dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 16px;align-items:baseline}
-.details dt{color:var(--ink-soft);font-size:13px;letter-spacing:.02em}
+.details dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:9px 16px;align-items:baseline}
+.details dt{color:var(--ink-soft);font-size:13.5px;letter-spacing:.02em}
 .details dd{margin:0;font-weight:500;word-break:break-word;-webkit-user-select:text;user-select:text}
 .details dd a{color:var(--aqua);text-decoration:none}
+.details dd a:hover{text-decoration:underline}
 .note{
-  display:block;margin-top:14px;font-size:13.5px;
-  font-weight:700;color:var(--green);
+  display:block;margin:14px 0 0;font-size:14px;
+  font-weight:700;color:#1f6b4c;   /* Leaf Green shaded to 5.6:1 on paper deep */
 }
 
 footer{
@@ -129,51 +144,92 @@ footer{
   border-top:1px solid var(--rule);
   font-size:13.5px;color:var(--ink-soft);
 }
-footer a{color:var(--ink-soft)}
 
-/* ---------- QR view (/kevin/qr.html) ---------- */
-.qrwrap{
-  margin:0 0 22px;
-  padding:22px;
-  background:var(--paper-beige);
-  border:5px solid var(--charcoal);
-  border-radius:24px;
+/* ---------- the QR view (#qr) ---------- */
+.qrhead-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.qrback{
+  font-size:14.5px;font-weight:700;color:var(--aqua);text-decoration:none;
+  padding:8px 4px;
 }
-.qrwrap img{display:block;width:100%;height:auto;image-rendering:pixelated}
-
-/* The Adaptig mark sits in the middle of the code. Codes are drawn at
-   error-correction level H, which reconstructs up to 30% of the data, so
-   covering the centre does not stop it scanning. Keep the mark small. */
-.qrstage{position:relative}
-.qrmark{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:21%;
-  aspect-ratio:1/1;
-  background:#fff;
-  border-radius:14%;
-  display:grid;place-items:center;
-}
-.qrmark i{
-  display:block;width:72%;aspect-ratio:1/1;
-  background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAgMAAAAEE2bmAAAADFBMVEUhISQhISQhISQhISS6b4+wAAAABHRSTlMA/V6fSgd4FgAAA0BJREFUeNrtmL1u1FAQhU/GkeKILVKmtFJQgbSPkEdIA3VqHgL5LaBMxXPcB6BAipQKCRcUSNu4QGJBxqbYn+xerz1zfzrO10RRbr4de86O7zVACCGEEEIIIYQQQgghhBBCCCEKxRtnWSaWRTf4mM3VosvmcihMt8KyaIXhKVNdBQCXydUDqDO5FgCWmVxrAE0m13JbWw5XA+BPJpcDMGTK1woA3rocdRX74tJdPQCgyuJabL/fOVzXAIAyi2tTUZfFVYc1aZYXmx9PGeqSo/LSXMNB+lNduwZWGVzdUTvTXJVXX4qr9epLcdXmlYU1XoaAiX1BnewajsZrmqscNTTe1Y0aGu+qTlQY62pPVBjrqu1LC3O89IBJwN/rRNfgPb9TXOXJlsa5OgC4fH1vCdi5IV5y814eaz1gYojXWY3+zhAwMcTrB4CvgT2f2nvt9l9Dmkv2CqeHQvR4bW75lR5W0eP1c79pXSa5un1ES31jLnq8vgDb6hZJrnZ0aIh3uaOFRZKrPupen+IqJssMd/XeIKsTXAeNO4MaMFFPe/4pK9a19C5skeBqvFu3TnA5b8wXCa56NyG2l9fHu4qDC13rARM9XovnNswHTPR4bY7a91ADJnq8hoOra6Jd2yruAVwaAiaGeHUAXhkmmBim128HqQwBE8s+7sPq0TLBzi3Tq3/3XOptXF397JYzzLWYbm2waz0/OYJcS2OtFldjrNXicoF7+Lm/rfZ7/E/fXu4eR09Rde0/5uIBvxrDI1IM8foO4PPul4co165l4gAMtX7yEz1eZwCAO/3kJ3q8rvcXqpz8RI/X3cGknv0H0eO1mQx/Txy2zC6pD2/XTjk3KUQ97fWew0W4Sm9aXqknP1FfJqy9VrQRrspwOrW6Ws9ZqgET9SHUeg6JcLmJr9QQ7pLJ6VoHu4agcTvvKv0yRH21IOq7KucX2ga7qskxWwa72slb3QW76oTWT3Vr/B5zCHXJOBtOK1mC4zUdMNHi1Y/vYBXo6swHet1VjdNUaQET+2e3Ws2ixasbb8ck0OVmNm9DmEtOXGynfSdEi9ft8ZuAuYCJEq+Lg7cmjWVjTgghhBBCCCGEEEIIIYQQQgj5b/kH9Xe6viV5xHQAAAAASUVORK5CYII=") center/contain no-repeat;
-}
-.qrhead{
-  font-family:var(--font-display);font-weight:800;
-  font-size:30px;color:var(--orange);margin:0 0 6px;
-}
-.qrsub{font-size:15.5px;color:var(--ink-soft);margin:0 0 26px}
 .switch{
-  display:inline-flex;gap:8px;margin:0 0 22px;
+  display:inline-flex;gap:6px;margin:0 0 20px;
   background:var(--paper-deep);border:1px solid var(--rule);
   border-radius:999px;padding:4px;
 }
 .switch button{
   border:0;background:transparent;border-radius:999px;
-  font-family:var(--font-body);font-size:14px;font-weight:700;
-  padding:9px 16px;color:var(--ink-soft);cursor:pointer;
+  font-family:var(--font-body);font-size:14.5px;font-weight:700;
+  padding:10px 16px;color:var(--ink-soft);cursor:pointer;
+  min-height:44px;
 }
 .switch button[aria-selected="true"]{background:var(--charcoal);color:var(--paper-beige)}
+.switch button:focus-visible{outline:3px solid var(--aqua);outline-offset:2px}
+
+.qrwrap{margin:0 0 20px}
+.qrstage{
+  position:relative;
+  background:#fff;                 /* white ground scans better than beige */
+  border:4px solid var(--charcoal);
+  border-radius:20px;
+  padding:10px;
+  cursor:zoom-in;
+}
+.qrstage:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
+.qrstage img{display:block;width:100%;height:auto;image-rendering:pixelated}
+.qrtap{
+  margin:10px 0 0;text-align:center;
+  font-size:13.5px;color:var(--ink-soft);
+}
+
+/* The Adaptig mark in the middle of the code. It covers about 5% of the code
+   area, against correction levels that reconstruct 15% (contact) and 25%
+   (link) — three to five times the headroom needed. Do not enlarge it. */
+.qrmark{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:20%;
+  aspect-ratio:1/1;
+  background:#fff;
+  border-radius:14%;
+  display:grid;place-items:center;
+  pointer-events:none;
+}
+.qrmark i{
+  display:block;width:72%;aspect-ratio:1/1;
+  background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAgMAAAAEE2bmAAAADFBMVEUhISQhISQhISQhISS6b4+wAAAABHRSTlMA/V6fSgd4FgAAA0BJREFUeNrtmL1u1FAQhU/GkeKILVKmtFJQgbSPkEdIA3VqHgL5LaBMxXPcB6BAipQKCRcUSNu4QGJBxqbYn+xerz1zfzrO10RRbr4de86O7zVACCGEEEIIIYQQQgghhBBCCCEKxRtnWSaWRTf4mM3VosvmcihMt8KyaIXhKVNdBQCXydUDqDO5FgCWmVxrAE0m13JbWw5XA+BPJpcDMGTK1woA3rocdRX74tJdPQCgyuJabL/fOVzXAIAyi2tTUZfFVYc1aZYXmx9PGeqSo/LSXMNB+lNduwZWGVzdUTvTXJVXX4qr9epLcdXmlYU1XoaAiX1BnewajsZrmqscNTTe1Y0aGu+qTlQY62pPVBjrqu1LC3O89IBJwN/rRNfgPb9TXOXJlsa5OgC4fH1vCdi5IV5y814eaz1gYojXWY3+zhAwMcTrB4CvgT2f2nvt9l9Dmkv2CqeHQvR4bW75lR5W0eP1c79pXSa5un1ES31jLnq8vgDb6hZJrnZ0aIh3uaOFRZKrPupen+IqJssMd/XeIKsTXAeNO4MaMFFPe/4pK9a19C5skeBqvFu3TnA5b8wXCa56NyG2l9fHu4qDC13rARM9XovnNswHTPR4bY7a91ADJnq8hoOra6Jd2yruAVwaAiaGeHUAXhkmmBim128HqQwBE8s+7sPq0TLBzi3Tq3/3XOptXF397JYzzLWYbm2waz0/OYJcS2OtFldjrNXicoF7+Lm/rfZ7/E/fXu4eR09Rde0/5uIBvxrDI1IM8foO4PPul4co165l4gAMtX7yEz1eZwCAO/3kJ3q8rvcXqpz8RI/X3cGknv0H0eO1mQx/Txy2zC6pD2/XTjk3KUQ97fWew0W4Sm9aXqknP1FfJqy9VrQRrspwOrW6Ws9ZqgET9SHUeg6JcLmJr9QQ7pLJ6VoHu4agcTvvKv0yRH21IOq7KucX2ga7qskxWwa72slb3QW76oTWT3Vr/B5zCHXJOBtOK1mC4zUdMNHi1Y/vYBXo6swHet1VjdNUaQET+2e3Ws2ixasbb8ck0OVmNm9DmEtOXGynfSdEi9ft8ZuAuYCJEq+Lg7cmjWVjTgghhBBCCCGEEEIIIYQQQgj5b/kH9Xe6viV5xHQAAAAASUVORK5CYII=") center/contain no-repeat;
+}
+
+.qrhead{
+  font-family:var(--font-display);font-weight:800;
+  font-size:30px;color:var(--charcoal);margin:0 0 6px;
+}
+.qrsub{font-size:15.5px;color:var(--ink-soft);margin:0 0 24px}
+
+/* Fullscreen: the biggest single win on a real scan. Plain white ground,
+   nothing else on screen, modules as large as the display allows. */
+.qrview.full{
+  position:fixed;inset:0;z-index:100;
+  max-width:none;padding:0;
+  background:#fff;
+  display:grid;place-items:center;
+}
+.qrview.full > *{display:none}
+.qrview.full .qrwrap{
+  display:block;margin:0;
+  width:min(98vw,88vh);
+}
+.qrview.full .qrstage{
+  border:0;border-radius:0;padding:0;cursor:zoom-out;
+}
+.qrview.full .qrtap{
+  position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));
+  color:#6b6b70;
+}
 
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+
+@media (prefers-contrast: more){
+  :root{--ink-soft:#3a3a3e;--rule:rgba(33,33,36,.3)}
+  .btn{border-color:var(--charcoal)}
+}
