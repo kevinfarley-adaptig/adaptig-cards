@@ -38,10 +38,10 @@ a plain white background, which is the single thing that most improves a scan
 across a table. Press and hold to save the code to your photos, then set it as
 a lock screen and you can show it without unlocking your phone.
 
-The code carries only a short link, so the squares are large: 33 of them across,
-about 7 to 8 screen pixels each on a phone, and 9 or more filling the screen.
-That is what a camera actually needs, and it is why the code is a link rather
-than your details encoded directly.
+The code carries only a short link, so the squares are large: about 37 across,
+6.5 to 7.6 screen pixels each on a phone, and 7.8 to 9 filling the screen. That
+is what a camera actually needs, and it is why the code is a link rather than
+your details encoded directly.
 
 ## The pre-written message
 
@@ -169,14 +169,14 @@ needed.
 The code carries your card's address and uses correction level Q. Correction
 level trades against module size, and module size is what actually decides
 whether a camera reads the code across a table. A link is short, so level Q
-costs almost nothing: 33 squares, against 61 for a version that encoded the
-contact details directly. Level Q recovers 25% of the code, five times what the
+costs almost nothing: about 37 squares, against 61 for a version that encoded
+the contact details directly, so every square is roughly 60% wider. Level Q recovers 25% of the code, five times what the
 Adaptig mark in the middle obscures.
 
 There was a second code carrying your details as a vCard, switchable. It saved
 two taps and worked with no signal, but it made you choose between two codes
 while shaking someone's hand, and it gave you nothing back: no message, no name,
-no lead. Dropping it also made the remaining squares 60% larger.
+no lead.
 
 ## Tests
 
