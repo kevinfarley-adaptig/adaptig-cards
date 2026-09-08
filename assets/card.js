@@ -301,39 +301,31 @@
     var sub     = view.querySelector("#qrsub");
     var evtCell = view.querySelector("#qrevent");
     var linkCell= view.querySelector("#qrlink");
-    var tabC    = view.querySelector("#tab-contact");
-    var tabL    = view.querySelector("#tab-links");
     var fail    = view.querySelector("#qrfail");
-    var current = "contact";
 
-    function render(which) {
-      current = which;
-      var isContact = which === "contact";
-      tabC.setAttribute("aria-selected", isContact ? "true" : "false");
-      tabL.setAttribute("aria-selected", isContact ? "false" : "true");
+    /* One code, not two.
 
+       An earlier version offered a second code carrying the vCard directly,
+       switchable. It saved two taps and worked with no signal, but it made the
+       trainer choose between two codes at the moment they are shaking someone's
+       hand, and it gave them nothing back: no message, no name, no lead.
+
+       This code opens the card, where the visitor can still save the contact in
+       one tap and can pick a channel. It is also the only version that makes
+       sense on a slide, a poster or an email signature, where the person
+       scanning does not know the trainer yet.
+
+       The payload is short, so correction level Q costs almost nothing and the
+       modules stay large. Module size, not correction level, is what decides
+       whether a camera reads the code across a table. */
+
+    function render() {
       if (!window.AdaptigQR) { fail.hidden = false; box.innerHTML = ""; return; }
       fail.hidden = true;
-      // Correction level is a trade against module size, and module size is
-      // what actually decides whether a camera reads the code across a table.
-      // The contact code carries the most data, so it takes level M: that
-      // recovers 15% of the codewords against a logo plate covering about 5%
-      // of the area, roughly three times the headroom needed, and it buys 20%
-      // larger modules than level Q (61 modules instead of 73). The link code
-      // is short enough that level Q costs nothing, so it keeps the wider
-      // margin.
-      var mods = isContact
-        ? drawInto(box, vcard(), "M")
-        : drawInto(box, cardUrl() + location.search, "Q");
-      stage.dataset.modules = mods;
-      head.textContent = isContact ? "Scan to save me" : "Scan to open my card";
-      sub.textContent  = isContact
-        ? "Goes straight into their contacts. Works with no internet."
-        : "WhatsApp, email, LinkedIn. They pick.";
+      stage.dataset.modules = drawInto(box, cardUrl() + location.search, "Q");
+      head.textContent = "Scan to open my card";
+      sub.textContent  = "Save my contact, WhatsApp, email, LinkedIn. They pick.";
     }
-
-    tabC.addEventListener("click", function () { render("contact"); });
-    tabL.addEventListener("click", function () { render("links"); });
 
     // Tap the code to fill the screen. Bigger modules on a plain white ground
     // is the single thing that most improves a scan across a table.
@@ -371,7 +363,7 @@
             : "None. Add ?e=Event+Name to this link for a code that names one.";
         }
         if (linkCell) linkCell.textContent = tidy(cardUrl());
-        render(current);
+        render();
       }
     }
     window.addEventListener("hashchange", syncHash);
